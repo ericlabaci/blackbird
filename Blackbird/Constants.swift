@@ -14,6 +14,7 @@ class Color {
 
 class Storyboard {
     static let Authentication = "Authentication"
+    static let TabBar = "TabBar"
 }
 
 class ViewControllers {
