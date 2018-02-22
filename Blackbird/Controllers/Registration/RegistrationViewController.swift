@@ -12,6 +12,13 @@ import RxCocoa
 
 class RegistrationViewController: BaseViewController {
     //MARK: - IBOutlets
+    @IBOutlet weak var profileImageView: UIImageView!{
+        didSet {
+            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
+            self.profileImageView.clipsToBounds = true
+            self.profileImageView.image = UIImage(named: Images.ProfileDefault)
+        }
+    }
     @IBOutlet weak var nameTextField: UITextField! {
         didSet {
             self.nameTextField.returnKeyType = .next
@@ -66,6 +73,12 @@ class RegistrationViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        self.view.endEditing(true)
     }
     
     //MARK: - Rx Setup

@@ -31,6 +31,11 @@ class Firebase {
     
 }
 
+class Images {
+    //MARK: Profile
+    static let ProfileDefault = "default_profile_bird"
+}
+
 class Identifiers {
     static let tweetCell = "tweetCell"
 }
