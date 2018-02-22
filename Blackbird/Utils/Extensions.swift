@@ -28,7 +28,7 @@ extension String {
         return self.count >= 8
     }
     
-    func remainingChar() -> Int {
+    var remainingChar: Int {
         return AppConfig.MaxCharTweet - self.count
     }
     

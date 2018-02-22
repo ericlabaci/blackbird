@@ -12,7 +12,11 @@ import RxCocoa
 
 class HomeViewController: BaseViewController {
     //MARK: - IBOutlets
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tableView: UITableView! {
+        didSet {
+            self.tableView.separatorStyle = .none
+        }
+    }
     @IBOutlet var addTweetButton: UIBarButtonItem!
     
     //MARK: - Variables

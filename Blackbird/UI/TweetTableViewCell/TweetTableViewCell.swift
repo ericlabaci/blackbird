@@ -11,7 +11,11 @@ import UIKit
 class TweetTableViewCell: UITableViewCell {
 
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var userLabel: UILabel!
+    @IBOutlet var userLabel: UILabel! {
+        didSet {
+            self.userLabel.textColor = UIColor.lightGray
+        }
+    }
     @IBOutlet var tweetLabel: UILabel!
     
     override func awakeFromNib() {

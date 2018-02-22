@@ -18,31 +18,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="336" height="95.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUn-Dd-pd3">
-                        <rect key="frame" x="8" y="8" width="46" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUn-Dd-pd3">
+                        <rect key="frame" x="8" y="8" width="42.5" height="18"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="@user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMM-d2-taw">
-                        <rect key="frame" x="62" y="8" width="266" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="58.5" y="9" width="269.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhm-XN-fmn">
-                        <rect key="frame" x="8" y="37" width="320" height="50.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" text="Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhm-XN-fmn">
+                        <rect key="frame" x="8" y="34" width="320" height="53.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="AMM-d2-taw" firstAttribute="centerY" secondItem="QUn-Dd-pd3" secondAttribute="centerY" id="3N2-fP-6Jq"/>
                     <constraint firstItem="QUn-Dd-pd3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="8vS-dz-Wgg"/>
                     <constraint firstAttribute="trailing" secondItem="Bhm-XN-fmn" secondAttribute="trailing" constant="8" id="K2f-RE-qha"/>
                     <constraint firstItem="QUn-Dd-pd3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Mei-YB-8rU"/>
                     <constraint firstItem="AMM-d2-taw" firstAttribute="leading" secondItem="QUn-Dd-pd3" secondAttribute="trailing" constant="8" id="Mfc-du-sKh"/>
-                    <constraint firstItem="AMM-d2-taw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="P7n-UC-5mb"/>
                     <constraint firstAttribute="trailing" secondItem="AMM-d2-taw" secondAttribute="trailing" constant="8" id="bAy-Lp-okZ"/>
                     <constraint firstItem="Bhm-XN-fmn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hRk-8V-ifS"/>
                     <constraint firstAttribute="bottom" secondItem="Bhm-XN-fmn" secondAttribute="bottom" constant="8" id="iby-by-Dl2"/>

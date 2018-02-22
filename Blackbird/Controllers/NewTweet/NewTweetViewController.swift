@@ -40,6 +40,7 @@ class NewTweetViewController : BaseViewController {
         super.viewDidLoad()
         self.setupExitButton()
         self.setupTweetTextView()
+        self.tweetTextView.becomeFirstResponder()
         
     }
     
@@ -67,7 +68,7 @@ class NewTweetViewController : BaseViewController {
                 }
                 self.placeholderLabel.isHidden = true
             }
-            self.charCountLabel.text = $0?.remainingChar().description
+            self.charCountLabel.text = $0?.remainingChar.description
         }).disposed(by: self.disposeBag)
         
     }
