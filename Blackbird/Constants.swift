@@ -23,3 +23,7 @@ class ViewControllers {
 class Firebase {
     
 }
+
+class Identifiers {
+    static let tweetCell = "tweetCell"
+}

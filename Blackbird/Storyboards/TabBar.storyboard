@@ -1,7 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wye-N7-CdK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="u4I-wm-DYm">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBarInitialController" id="Wye-N7-CdK" customClass="TabBarController" customModule="Blackbird" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GgK-8v-GLQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5vn-4u-Kmh" kind="relationship" relationship="viewControllers" id="ADT-cU-kvy"/>
+                        <segue destination="oLy-qR-eEl" kind="relationship" relationship="viewControllers" id="xDD-G2-XxU"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ebs-Im-Hc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-978" y="-594"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="wcy-OS-Vch">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="oLy-qR-eEl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="1bD-BQ-Hgs"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="liA-Qc-uin" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1262" y="-118"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="ogg-oL-xsX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="5vn-4u-Kmh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="9MX-mA-3vQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rBq-v5-hA0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-657" y="-119"/>
+        </scene>
+    </scenes>
 </document>

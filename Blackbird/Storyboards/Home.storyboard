@@ -1,7 +1,75 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2H2-gK-HlP">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Home-->
+        <scene sceneID="1Cx-To-0OX">
+            <objects>
+                <navigationController storyboardIdentifier="homeInitialController" id="2H2-gK-HlP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="kCv-qo-2u7"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0b4-e9-LMb">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hpP-Z9-vNt" kind="relationship" relationship="rootViewController" id="cBC-ke-UqY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wjT-Cn-178" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-225" y="9"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="qt6-G1-LJC">
+            <objects>
+                <viewController id="hpP-Z9-vNt" customClass="HomeViewController" customModule="Blackbird" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eDk-nH-cRS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wVq-Ya-jB2">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tweetCell" id="Lcg-gs-jeK" customClass="TweetTableViewCell" customModule="Blackbird" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lcg-gs-jeK" id="wVr-qD-oie">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wVq-Ya-jB2" firstAttribute="top" secondItem="csx-tp-dx1" secondAttribute="top" id="LLy-qM-4lz"/>
+                            <constraint firstItem="wVq-Ya-jB2" firstAttribute="leading" secondItem="csx-tp-dx1" secondAttribute="leading" id="U2K-jZ-etB"/>
+                            <constraint firstItem="wVq-Ya-jB2" firstAttribute="trailing" secondItem="csx-tp-dx1" secondAttribute="trailing" id="xg7-Nh-j4k"/>
+                            <constraint firstItem="csx-tp-dx1" firstAttribute="bottom" secondItem="wVq-Ya-jB2" secondAttribute="bottom" id="xtX-wh-IMq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="csx-tp-dx1"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="HDr-r5-xk8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="CEN-WP-zsJ"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addTweetButton" destination="CEN-WP-zsJ" id="gSk-u7-uXx"/>
+                        <outlet property="tableView" destination="wVq-Ya-jB2" id="EDG-qB-FrU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DQ0-tp-eBS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="982" y="9"/>
+        </scene>
+    </scenes>
 </document>
