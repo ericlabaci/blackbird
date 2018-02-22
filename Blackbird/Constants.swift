@@ -13,7 +13,7 @@ class Color {
 }
 
 class Storyboard {
-    
+    static let Authentication = "Authentication"
 }
 
 class ViewControllers {

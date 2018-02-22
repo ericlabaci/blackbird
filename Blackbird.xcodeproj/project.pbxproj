@@ -10,11 +10,12 @@
 		6D27DCD4203EFA600034AA53 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27DCD3203EFA600034AA53 /* Constants.swift */; };
 		9F8EF0CA98E04E01D2F54B47 /* Pods_Blackbird.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CA27F2E9DD9F0CC9EA1CDB /* Pods_Blackbird.framework */; };
 		F459BB68203EF63400A9F58C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB67203EF63400A9F58C /* AppDelegate.swift */; };
-		F459BB6A203EF63400A9F58C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB69203EF63400A9F58C /* ViewController.swift */; };
-		F459BB6D203EF63400A9F58C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F459BB6B203EF63400A9F58C /* Main.storyboard */; };
 		F459BB6F203EF63400A9F58C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F459BB6E203EF63400A9F58C /* Assets.xcassets */; };
 		F459BB72203EF63400A9F58C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F459BB70203EF63400A9F58C /* LaunchScreen.storyboard */; };
 		F459BB7A203EF76800A9F58C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F459BB79203EF76800A9F58C /* GoogleService-Info.plist */; };
+		F459BB7C203EFF1100A9F58C /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F459BB7B203EFF1100A9F58C /* Authentication.storyboard */; };
+		F459BB80203EFFB300A9F58C /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F459BB7F203EFFB300A9F58C /* TabBar.storyboard */; };
+		F459BB82203EFFBB00A9F58C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F459BB81203EFFBB00A9F58C /* Home.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,12 +25,13 @@
 		9798023C5AABC1602ABBBC31 /* Pods-Blackbird.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blackbird.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blackbird/Pods-Blackbird.release.xcconfig"; sourceTree = "<group>"; };
 		F459BB64203EF63300A9F58C /* Blackbird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackbird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F459BB67203EF63400A9F58C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F459BB69203EF63400A9F58C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F459BB6C203EF63400A9F58C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F459BB6E203EF63400A9F58C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F459BB71203EF63400A9F58C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F459BB73203EF63400A9F58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F459BB79203EF76800A9F58C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F459BB7B203EFF1100A9F58C /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		F459BB7F203EFFB300A9F58C /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
+		F459BB81203EFFBB00A9F58C /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,16 +84,33 @@
 		F459BB66203EF63300A9F58C /* Blackbird */ = {
 			isa = PBXGroup;
 			children = (
+				F459BB7E203EFF1F00A9F58C /* Controllers */,
+				F459BB7D203EFF1400A9F58C /* Storyboards */,
 				F459BB67203EF63400A9F58C /* AppDelegate.swift */,
-				F459BB69203EF63400A9F58C /* ViewController.swift */,
 				F459BB79203EF76800A9F58C /* GoogleService-Info.plist */,
-				F459BB6B203EF63400A9F58C /* Main.storyboard */,
 				F459BB6E203EF63400A9F58C /* Assets.xcassets */,
-				F459BB70203EF63400A9F58C /* LaunchScreen.storyboard */,
 				F459BB73203EF63400A9F58C /* Info.plist */,
 				6D27DCD3203EFA600034AA53 /* Constants.swift */,
 			);
 			path = Blackbird;
+			sourceTree = "<group>";
+		};
+		F459BB7D203EFF1400A9F58C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F459BB7B203EFF1100A9F58C /* Authentication.storyboard */,
+				F459BB70203EF63400A9F58C /* LaunchScreen.storyboard */,
+				F459BB7F203EFFB300A9F58C /* TabBar.storyboard */,
+				F459BB81203EFFBB00A9F58C /* Home.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		F459BB7E203EFF1F00A9F58C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,10 +175,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F459BB80203EFFB300A9F58C /* TabBar.storyboard in Resources */,
 				F459BB72203EF63400A9F58C /* LaunchScreen.storyboard in Resources */,
 				F459BB7A203EF76800A9F58C /* GoogleService-Info.plist in Resources */,
+				F459BB82203EFFBB00A9F58C /* Home.storyboard in Resources */,
 				F459BB6F203EF63400A9F58C /* Assets.xcassets in Resources */,
-				F459BB6D203EF63400A9F58C /* Main.storyboard in Resources */,
+				F459BB7C203EFF1100A9F58C /* Authentication.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +255,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F459BB6A203EF63400A9F58C /* ViewController.swift in Sources */,
 				F459BB68203EF63400A9F58C /* AppDelegate.swift in Sources */,
 				6D27DCD4203EFA600034AA53 /* Constants.swift in Sources */,
 			);
@@ -243,14 +263,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F459BB6B203EF63400A9F58C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F459BB6C203EF63400A9F58C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F459BB70203EF63400A9F58C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
