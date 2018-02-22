@@ -15,10 +15,12 @@ class Color {
 class Storyboard {
     static let Authentication = "Authentication"
     static let TabBar = "TabBar"
+    static let Home = "Home"
 }
 
 class ViewControllers {
     static let Login = "LoginViewController"
+    static let NewTweet = "NewTweetViewController"
 }
 
 class Firebase {
@@ -27,4 +29,8 @@ class Firebase {
 
 class Identifiers {
     static let tweetCell = "tweetCell"
+}
+
+class AppConfig {
+    static var MaxCharTweet = 280
 }

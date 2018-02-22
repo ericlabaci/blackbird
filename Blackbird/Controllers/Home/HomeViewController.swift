@@ -49,7 +49,9 @@ class HomeViewController: BaseViewController {
     
     func setupAddTweetButton() {
         self.addTweetButton.rx.tap.subscribe(onNext: {
-            
+            let storyboard = UIStoryboard(name: Storyboard.Home, bundle: nil)
+            let newTweetVC = storyboard.instantiateViewController(withIdentifier: ViewControllers.NewTweet)
+            self.present(newTweetVC, animated: true, completion: nil)
         }).disposed(by: disposeBag)
     }
     

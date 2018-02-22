@@ -19,4 +19,19 @@ extension String {
     var isValidPassword: Bool {
         return self.count >= 8
     }
+    
+    func remainingChar() -> Int {
+        return AppConfig.MaxCharTweet - self.count
+    }
+    
+    var maxCharText : String {
+        let maxIndex = self.index(self.startIndex, offsetBy: AppConfig.MaxCharTweet)
+        return String(self[..<maxIndex])
+    }
+}
+
+extension Int {
+    var description : String {
+        return String(self)
+    }
 }
