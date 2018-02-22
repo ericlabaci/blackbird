@@ -17,7 +17,7 @@ class Storyboard {
 }
 
 class ViewControllers {
-    
+    static let Login = "LoginViewController"
 }
 
 class Firebase {
