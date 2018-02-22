@@ -48,6 +48,10 @@ class LoginViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if Auth.auth().currentUser != nil {
+            NavigationUtils.goToHome(animated: false)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

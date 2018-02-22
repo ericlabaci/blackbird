@@ -9,14 +9,14 @@
 import UIKit
 
 class NavigationUtils {
-    static func goToHome() {
+    static func goToHome(animated: Bool = true) {
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
         if let navController = rootVC as? UINavigationController {
             let storyboard = UIStoryboard(name: Storyboard.TabBar, bundle: nil)
             if let vc = storyboard.instantiateInitialViewController() {
                 //Need to hide Navigation Bar or the layout will bug in Home
                 navController.setNavigationBarHidden(true, animated: false)
-                navController.pushViewController(vc, animated: true)
+                navController.pushViewController(vc, animated: animated)
                 let controllers = navController.viewControllers
                 if let homeController = controllers.last {
                     navController.viewControllers = [homeController]
