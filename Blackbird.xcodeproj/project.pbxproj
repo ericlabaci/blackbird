@@ -30,6 +30,7 @@
 		F459BB9C203F4B0F00A9F58C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB99203F4B0F00A9F58C /* Extensions.swift */; };
 		F459BB9D203F4B0F00A9F58C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB9A203F4B0F00A9F58C /* Utils.swift */; };
 		F459BB9E203F4B0F00A9F58C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB9B203F4B0F00A9F58C /* Constants.swift */; };
+		F459BBA0203F4E3D00A9F58C /* NavigationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB9F203F4E3D00A9F58C /* NavigationUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F459BB99203F4B0F00A9F58C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F459BB9A203F4B0F00A9F58C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F459BB9B203F4B0F00A9F58C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F459BB9F203F4E3D00A9F58C /* NavigationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				F459BB99203F4B0F00A9F58C /* Extensions.swift */,
 				F459BB9A203F4B0F00A9F58C /* Utils.swift */,
 				F459BB97203F382300A9F58C /* FirebaseUtils.swift */,
+				F459BB9F203F4E3D00A9F58C /* NavigationUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				F459BB85203F000100A9F58C /* LoginViewController.swift in Sources */,
 				F459BB87203F002A00A9F58C /* BaseViewController.swift in Sources */,
 				6D27DCE5203F2B5A0034AA53 /* HomeViewModel.swift in Sources */,
+				F459BBA0203F4E3D00A9F58C /* NavigationUtils.swift in Sources */,
 				6D27DCE3203F1DE20034AA53 /* Tweet.swift in Sources */,
 				F459BB9D203F4B0F00A9F58C /* Utils.swift in Sources */,
 				F459BB96203F33B300A9F58C /* RegistrationViewController.swift in Sources */,

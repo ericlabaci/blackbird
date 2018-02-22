@@ -96,14 +96,15 @@ class LoginViewController: BaseViewController {
                 return
             }
             FirebaseUtils.login(email: email, password: password, success: { (user) in
-                print("\(user)")
-                let storyboard = UIStoryboard(name: Storyboard.TabBar, bundle: nil)
-                if let initialVC = storyboard.instantiateInitialViewController() {
-                    //FIXME: - Should present?
-                    self?.present(initialVC, animated: true, completion: nil)
-                }
+                NavigationUtils.goToHome()
             }, failure: { (error) in
-                print("Error: \(error.localizedDescription)")
+                //FIXME: - Change to Custom Alert Controller method
+                let alertVC = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+                alertVC.addAction(okAction)
+                
+                self?.present(alertVC, animated: true, completion: nil)
             })
         }).disposed(by: self.disposeBag)
         

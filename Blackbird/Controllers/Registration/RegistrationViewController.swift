@@ -137,7 +137,20 @@ class RegistrationViewController: BaseViewController {
     
     private func setupButtonHandling() {
         self.registerButtons.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            
+            guard let email = self?.emailTextField.text, let password = self?.passwordTextField.text else {
+                return
+            }
+            FirebaseUtils.register(email: email, password: password, success: { (user) in
+                NavigationUtils.goToHome()
+            }, failure: { (error) in
+                //FIXME: - Change to Custom Alert Controller method
+                let alertVC = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+                alertVC.addAction(okAction)
+                
+                self?.present(alertVC, animated: true, completion: nil)
+            })
         }).disposed(by: self.disposeBag)
     }
 }
