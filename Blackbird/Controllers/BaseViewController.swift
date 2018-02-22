@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class BaseViewController: UIViewController {
-
+    //MARK: - Variables
+    internal let disposeBag = DisposeBag()
+    
+    //MARK: - VC Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(_ animated: Bool) {

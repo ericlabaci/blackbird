@@ -34,8 +34,8 @@ class NewTweetViewController : BaseViewController {
     }
     
     //MARK: - Variables
-    var disposeBag: DisposeBag = DisposeBag()
     
+    //MARK: - VC Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupExitButton()

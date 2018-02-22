@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -80,16 +79,80 @@
             </objects>
             <point key="canvasLocation" x="624.79999999999995" y="247.82608695652175"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration View Controller-->
         <scene sceneID="Pmh-21-CIl">
             <objects>
-                <viewController id="0yE-YZ-oTD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" id="0yE-YZ-oTD" customClass="RegistrationViewController" customModule="Blackbird" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Ji-cw-vTg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3NO-Gb-1Fa">
+                                <rect key="frame" x="32" y="96" width="311" height="260"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4a9-zr-rOp">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2sY-o8-Di6">
+                                        <rect key="frame" x="0.0" y="46" width="311" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Pk-Kc-aMn">
+                                        <rect key="frame" x="0.0" y="92" width="311" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat e-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kxw-dA-mYx">
+                                        <rect key="frame" x="0.0" y="138" width="311" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Je6-fB-Khq">
+                                        <rect key="frame" x="0.0" y="184" width="311" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="60K-Rr-oaR">
+                                        <rect key="frame" x="0.0" y="230" width="311" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0k-Aa-yj4">
+                                <rect key="frame" x="159.5" y="605" width="57" height="30"/>
+                                <state key="normal" title="Register"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LCg-Kd-4SD" firstAttribute="bottom" secondItem="3NO-Gb-1Fa" secondAttribute="bottom" constant="311" id="G5v-a9-sN0"/>
+                            <constraint firstItem="LCg-Kd-4SD" firstAttribute="trailing" secondItem="3NO-Gb-1Fa" secondAttribute="trailing" constant="32" id="U5M-FI-vum"/>
+                            <constraint firstItem="x0k-Aa-yj4" firstAttribute="centerX" secondItem="LCg-Kd-4SD" secondAttribute="centerX" id="UeE-55-Z0H"/>
+                            <constraint firstItem="3NO-Gb-1Fa" firstAttribute="leading" secondItem="LCg-Kd-4SD" secondAttribute="leading" constant="32" id="VXP-r2-QvA"/>
+                            <constraint firstItem="LCg-Kd-4SD" firstAttribute="bottom" secondItem="x0k-Aa-yj4" secondAttribute="bottom" constant="32" id="bMm-RH-GXu"/>
+                            <constraint firstItem="3NO-Gb-1Fa" firstAttribute="top" secondItem="LCg-Kd-4SD" secondAttribute="top" constant="32" id="bb9-vE-BVq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="LCg-Kd-4SD"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="0Pk-Kc-aMn" id="F8I-DR-kp2"/>
+                        <outlet property="nameTextField" destination="4a9-zr-rOp" id="SsR-5A-SXJ"/>
+                        <outlet property="passwordTextField" destination="Je6-fB-Khq" id="BPT-dF-ab7"/>
+                        <outlet property="registerButtons" destination="x0k-Aa-yj4" id="1h8-wF-Aat"/>
+                        <outlet property="repeatEmailTextField" destination="kxw-dA-mYx" id="V5r-Vz-erT"/>
+                        <outlet property="repeatPasswordTextField" destination="60K-Rr-oaR" id="PuO-t0-dFx"/>
+                        <outlet property="userNameTextField" destination="2sY-o8-Di6" id="CRr-Wz-OaW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jfy-Eh-CVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

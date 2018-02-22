@@ -35,7 +35,6 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     //MARK: - Variables
-    private let disposeBag = DisposeBag()
     
     //MARK: - VC Methods
     override func viewDidLoad() {
@@ -91,25 +90,28 @@ class LoginViewController: BaseViewController {
     }
     
     private func setupButtonHandling() {
+        //MARK: Login button
         self.loginButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
             guard let email = self?.emailTextField.text, let password = self?.passwordTextField.text else {
                 return
             }
-            Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-                if let error = error {
-                    print("Error: \(error.localizedDescription)")
-                } else if let user = user {
-                    print("\(user)")
-                    let storyboard = UIStoryboard(name: Storyboard.TabBar, bundle: nil)
-                    if let initialVC = storyboard.instantiateInitialViewController() {
-                        self?.present(initialVC, animated: true, completion: nil)
-                    }
+            FirebaseUtils.login(email: email, password: password, success: { (user) in
+                print("\(user)")
+                let storyboard = UIStoryboard(name: Storyboard.TabBar, bundle: nil)
+                if let initialVC = storyboard.instantiateInitialViewController() {
+                    //FIXME: - Should present?
+                    self?.present(initialVC, animated: true, completion: nil)
                 }
+            }, failure: { (error) in
+                print("Error: \(error.localizedDescription)")
             })
         }).disposed(by: self.disposeBag)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         
+        //MARK: Register button
+        self.registerButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            let storyboard = UIStoryboard(name: Storyboard.Authentication, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: ViewControllers.Registration)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: self.disposeBag)
     }
 }

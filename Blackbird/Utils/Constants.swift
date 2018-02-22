@@ -19,7 +19,11 @@ class Storyboard {
 }
 
 class ViewControllers {
+    //MARK: Authentication
     static let Login = "LoginViewController"
+    static let Registration = "RegistrationViewController"
+    
+    //MARK: Home
     static let NewTweet = "NewTweetViewController"
 }
 

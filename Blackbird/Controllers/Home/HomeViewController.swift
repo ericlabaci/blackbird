@@ -16,7 +16,6 @@ class HomeViewController: BaseViewController {
     @IBOutlet var addTweetButton: UIBarButtonItem!
     
     //MARK: - Variables
-    var disposeBag: DisposeBag = DisposeBag()
     var homeViewModel : HomeViewModel = HomeViewModel()
     
     override func viewDidLoad() {
