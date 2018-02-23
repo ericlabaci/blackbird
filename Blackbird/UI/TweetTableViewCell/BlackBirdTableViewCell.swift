@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetTableViewCell: UITableViewCell {
+class BlackBirdTableViewCell: UITableViewCell {
 
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var userLabel: UILabel! {
@@ -16,7 +16,7 @@ class TweetTableViewCell: UITableViewCell {
             self.userLabel.textColor = UIColor.lightGray
         }
     }
-    @IBOutlet var tweetLabel: UILabel!
+    @IBOutlet var blackBirdLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,10 +29,12 @@ class TweetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCellWith(tweet: Tweet) {
-        self.nameLabel.text = tweet.name
-        self.userLabel.text = tweet.user
-        self.tweetLabel.text = tweet.tweet
+    func configureCellWith(blackBird: BlackBird) {
+        FirebaseUtils.getUser { (name, userName) in
+            self.nameLabel.text = name
+            self.blackBirdLabel.text = blackBird.text
+            self.userLabel.text = userName
+        }
     }
     
 }

@@ -9,11 +9,19 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import FirebaseFirestore
 
 class HomeViewModel {
-    var tweets : Variable<[Tweet]> = Variable([])
+    var blackBird : Variable<[BlackBird]> = Variable([])
     
     init() {
-        tweets.value = [Tweet(name: "Raphael", user: "@raphacarletti", tweet: "Nossa, hoje ta tao legal"), Tweet(name: "Eric", user: "@ericlabaci", tweet: "RX e mt dificil rsrsrsrs")]
+        self.getAllBlackBirds()
     }
+    
+    func getAllBlackBirds() {
+        FirebaseUtils.getAllBlackBirds { (blackBirdArray) in
+            self.blackBird.value = blackBirdArray
+        }
+    }
+    
 }

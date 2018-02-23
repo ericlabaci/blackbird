@@ -12,12 +12,12 @@ import RxSwift
 
 class NewTweetViewController : BaseViewController {
     //MARK: - IBOutlets
-    @IBOutlet var tweetButton: UIButton! {
+    @IBOutlet var blackBirdButton: UIButton! {
         didSet {
-            self.tweetButton.backgroundColor = Color.secondaryColor
-            self.tweetButton.setTitleColor(UIColor.white, for: .normal)
-            self.tweetButton.clipsToBounds = true
-            self.tweetButton.layer.cornerRadius = 10
+            self.blackBirdButton.backgroundColor = Color.secondaryColor
+            self.blackBirdButton.setTitleColor(UIColor.white, for: .normal)
+            self.blackBirdButton.clipsToBounds = true
+            self.blackBirdButton.layer.cornerRadius = 10
         }
     }
     @IBOutlet var exitButton: UIButton!
@@ -26,7 +26,7 @@ class NewTweetViewController : BaseViewController {
             self.placeholderLabel.textColor = UIColor.lightGray
         }
     }
-    @IBOutlet var tweetTextView: UITextView!
+    @IBOutlet var blackBirdTextView: UITextView!
     @IBOutlet var charCountLabel: UILabel! {
         didSet {
             self.charCountLabel.textColor = UIColor.lightGray
@@ -34,13 +34,15 @@ class NewTweetViewController : BaseViewController {
     }
     
     //MARK: - Variables
+    var viewModel: NewTweetViewModel = NewTweetViewModel()
     
     //MARK: - VC Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupExitButton()
         self.setupTweetTextView()
-        self.tweetTextView.becomeFirstResponder()
+        self.setupBlackBirdIt()
+        self.blackBirdTextView.becomeFirstResponder()
         
     }
     
@@ -56,7 +58,7 @@ class NewTweetViewController : BaseViewController {
     }
     
     func setupTweetTextView() {
-        self.tweetTextView.rx.text.subscribe(onNext: {
+        self.blackBirdTextView.rx.text.subscribe(onNext: {
             guard let size = $0?.count else {
                 return
             }
@@ -64,13 +66,29 @@ class NewTweetViewController : BaseViewController {
                 self.placeholderLabel.isHidden = false
             } else {
                 if size > AppConfig.MaxCharTweet {
-                    self.tweetTextView.text = self.tweetTextView.text.maxCharText
+                    self.blackBirdTextView.text = self.blackBirdTextView.text.maxCharText
                 }
                 self.placeholderLabel.isHidden = true
             }
             self.charCountLabel.text = $0?.remainingChar.description
+            self.viewModel.text = $0
         }).disposed(by: self.disposeBag)
         
+    }
+    
+    
+    func setupBlackBirdIt() {
+        self.viewModel.time = Date()
+        self.blackBirdButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: {
+            self.viewModel.addTweetToFirebase(success: {
+                self.dismiss(animated: true, completion: nil)
+            }, failure: { (error) in
+                let alertController = UIAlertController(title: "Error while sending to firebase", message: "", preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertController.addAction(actionOk)
+                self.present(alertController, animated: true, completion: nil)
+            })
+        }).disposed(by: self.disposeBag)
     }
     
 }

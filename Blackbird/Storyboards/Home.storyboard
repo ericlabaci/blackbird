@@ -137,11 +137,11 @@
                         <viewLayoutGuide key="safeArea" id="sXZ-l8-4aZ"/>
                     </view>
                     <connections>
+                        <outlet property="blackBirdButton" destination="aT9-xO-bfC" id="LoR-zZ-fLe"/>
+                        <outlet property="blackBirdTextView" destination="VgN-Pp-mD9" id="H7Q-e1-bUV"/>
                         <outlet property="charCountLabel" destination="8uk-C0-D7x" id="JcU-hf-HBb"/>
                         <outlet property="exitButton" destination="ErM-3k-wFK" id="aiW-8C-x6m"/>
                         <outlet property="placeholderLabel" destination="rZy-Gt-yyj" id="RPo-si-tEt"/>
-                        <outlet property="tweetButton" destination="aT9-xO-bfC" id="4ol-yJ-Dmp"/>
-                        <outlet property="tweetTextView" destination="VgN-Pp-mD9" id="0pD-By-18j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R1f-8V-1xX" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -31,8 +31,8 @@ class HomeViewController: BaseViewController {
         self.navigationItem.titleView = imageView
         
         //Table View Cell Register
-        self.tableView.register(TweetTableViewCell.self, forCellReuseIdentifier: Identifiers.tweetCell)
-        self.tableView.register(UINib(nibName: String(describing: TweetTableViewCell.self), bundle: nil), forCellReuseIdentifier: Identifiers.tweetCell)
+        self.tableView.register(BlackBirdTableViewCell.self, forCellReuseIdentifier: Identifiers.blackBirdCell)
+        self.tableView.register(UINib(nibName: String(describing: BlackBirdTableViewCell.self), bundle: nil), forCellReuseIdentifier: Identifiers.blackBirdCell)
         
         //RX
         self.setupTableViewRX()
@@ -44,9 +44,9 @@ class HomeViewController: BaseViewController {
     }
     
     func setupTableViewRX() {
-        self.homeViewModel.tweets.asObservable().bind(to: tableView.rx.items(cellIdentifier: Identifiers.tweetCell, cellType: TweetTableViewCell.self)) {
-            (row, tweet, cell) in
-                cell.configureCellWith(tweet: tweet)
+        self.homeViewModel.blackBird.asObservable().bind(to: tableView.rx.items(cellIdentifier: Identifiers.blackBirdCell, cellType: BlackBirdTableViewCell.self)) {
+            (row, blackBird, cell) in
+                cell.configureCellWith(blackBird: blackBird)
         }.disposed(by: disposeBag)
     }
     

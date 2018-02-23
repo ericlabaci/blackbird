@@ -50,7 +50,7 @@ class Images {
 }
 
 class Identifiers {
-    static let tweetCell = "tweetCell"
+    static let blackBirdCell = "blackBirdCell"
 }
 
 class AppConfig {
