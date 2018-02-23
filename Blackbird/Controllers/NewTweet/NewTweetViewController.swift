@@ -66,11 +66,11 @@ class NewTweetViewController : BaseViewController {
                 self?.placeholderLabel.isHidden = false
             } else {
                 if size > AppConfig.MaxCharTweet {
-                    self.blackBirdTextView.text = self.blackBirdTextView.text.maxCharText
+                    self?.blackBirdTextView.text = self?.blackBirdTextView.text.maxCharText
                 }
                 self?.placeholderLabel.isHidden = true
             }
-            self.viewModel.text = $0
+            self?.viewModel.text = $0
             self?.charCountLabel.text = $0?.remainingChar.description
         }).disposed(by: self.disposeBag)
         
