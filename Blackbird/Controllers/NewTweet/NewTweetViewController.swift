@@ -51,27 +51,27 @@ class NewTweetViewController : BaseViewController {
     }
     
     func setupExitButton() {
-        self.exitButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: {
-            self.view.endEditing(true)
-            self.dismiss(animated: true, completion: nil)
+        self.exitButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.view.endEditing(true)
+            self?.dismiss(animated: true, completion: nil)
         }).disposed(by: self.disposeBag)
     }
     
     func setupTweetTextView() {
-        self.blackBirdTextView.rx.text.subscribe(onNext: {
+        self.blackBirdTextView.rx.text.subscribe(onNext: { [weak self] in
             guard let size = $0?.count else {
                 return
             }
             if size == 0 {
-                self.placeholderLabel.isHidden = false
+                self?.placeholderLabel.isHidden = false
             } else {
                 if size > AppConfig.MaxCharTweet {
                     self.blackBirdTextView.text = self.blackBirdTextView.text.maxCharText
                 }
-                self.placeholderLabel.isHidden = true
+                self?.placeholderLabel.isHidden = true
             }
-            self.charCountLabel.text = $0?.remainingChar.description
             self.viewModel.text = $0
+            self?.charCountLabel.text = $0?.remainingChar.description
         }).disposed(by: self.disposeBag)
         
     }
