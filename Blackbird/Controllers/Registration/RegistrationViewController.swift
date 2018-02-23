@@ -157,13 +157,7 @@ class RegistrationViewController: BaseViewController {
             FirebaseUtils.register(email: email, password: password, name: name, userName: userName, success: { (user) in
                 NavigationUtils.goToHome()
             }, failure: { (error) in
-                //FIXME: - Change to Custom Alert Controller method
-                let alertVC = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
-                alertVC.addAction(okAction)
-                
-                self?.present(alertVC, animated: true, completion: nil)
+                self?.present(AlertControllerUtils.getOKAlertController(code: .RegisterFailed, okCompletion: nil), animated: true, completion: nil)
             })
         }).disposed(by: self.disposeBag)
     }

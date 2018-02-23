@@ -34,6 +34,8 @@
 		F459BB9D203F4B0F00A9F58C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB9A203F4B0F00A9F58C /* Utils.swift */; };
 		F459BB9E203F4B0F00A9F58C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB9B203F4B0F00A9F58C /* Constants.swift */; };
 		F459BBA0203F4E3D00A9F58C /* NavigationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F459BB9F203F4E3D00A9F58C /* NavigationUtils.swift */; };
+		F45AC08220406CA100416AF4 /* AlertControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AC08120406CA100416AF4 /* AlertControllerUtils.swift */; };
+		F45AC08420406D6800416AF4 /* AlertMessages.plist in Resources */ = {isa = PBXBuildFile; fileRef = F45AC08320406D6800416AF4 /* AlertMessages.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		F459BB9A203F4B0F00A9F58C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F459BB9B203F4B0F00A9F58C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F459BB9F203F4E3D00A9F58C /* NavigationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtils.swift; sourceTree = "<group>"; };
+		F45AC08120406CA100416AF4 /* AlertControllerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerUtils.swift; sourceTree = "<group>"; };
+		F45AC08320406D6800416AF4 /* AlertMessages.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AlertMessages.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 				F459BB9A203F4B0F00A9F58C /* Utils.swift */,
 				F459BB97203F382300A9F58C /* FirebaseUtils.swift */,
 				F459BB9F203F4E3D00A9F58C /* NavigationUtils.swift */,
+				F45AC08120406CA100416AF4 /* AlertControllerUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				F459BB79203EF76800A9F58C /* GoogleService-Info.plist */,
 				F459BB6E203EF63400A9F58C /* Assets.xcassets */,
 				F459BB73203EF63400A9F58C /* Info.plist */,
+				F45AC08320406D6800416AF4 /* AlertMessages.plist */,
 			);
 			path = Blackbird;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 				F459BB82203EFFBB00A9F58C /* Home.storyboard in Resources */,
 				F459BB6F203EF63400A9F58C /* Assets.xcassets in Resources */,
 				F459BB7C203EFF1100A9F58C /* Authentication.storyboard in Resources */,
+				F45AC08420406D6800416AF4 /* AlertMessages.plist in Resources */,
 				6D27DCD6203F035F0034AA53 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +422,7 @@
 				F459BB96203F33B300A9F58C /* RegistrationViewController.swift in Sources */,
 				6DCC79B220405662002A7643 /* NewTweetViewModel.swift in Sources */,
 				6D27DCD8203F05780034AA53 /* TabBarController.swift in Sources */,
+				F45AC08220406CA100416AF4 /* AlertControllerUtils.swift in Sources */,
 				F459BB9C203F4B0F00A9F58C /* Extensions.swift in Sources */,
 				F459BB68203EF63400A9F58C /* AppDelegate.swift in Sources */,
 				F459BB98203F382300A9F58C /* FirebaseUtils.swift in Sources */,
@@ -551,11 +559,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98552BXM3C;
+				DEVELOPMENT_TEAM = 2DB2T6HKRU;
 				INFOPLIST_FILE = Blackbird/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-blackbird.Blackbird";
+				PRODUCT_BUNDLE_IDENTIFIER = blackbird.Blackbird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -568,11 +576,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98552BXM3C;
+				DEVELOPMENT_TEAM = 2DB2T6HKRU;
 				INFOPLIST_FILE = Blackbird/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-blackbird.Blackbird";
+				PRODUCT_BUNDLE_IDENTIFIER = blackbird.Blackbird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
