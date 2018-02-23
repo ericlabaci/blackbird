@@ -8,7 +8,7 @@ target 'Blackbird' do
   # Pods for Blackbird
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
-  pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
 
   pod 'RxSwift'

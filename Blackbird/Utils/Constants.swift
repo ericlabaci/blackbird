@@ -27,8 +27,21 @@ class ViewControllers {
     static let NewTweet = "NewTweetViewController"
 }
 
-class Firebase {
+struct FirebaseKnots {
+    struct Users {
+        static let Root = "users"
+        static let Name = "name"
+        static let UserName = "userName"
+        static let Following = "following"
+        static let Followers = "followers"
+    }
     
+    struct Blackbirds {
+        static let Root = "blackbirds"
+        static let Text = "text"
+        static let Timestamp = "timestamp"
+        static let Likes = "likes"
+    }
 }
 
 class Images {

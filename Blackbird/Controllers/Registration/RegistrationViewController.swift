@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import FirebaseFirestore
 
 class RegistrationViewController: BaseViewController {
     //MARK: - IBOutlets
@@ -150,10 +151,10 @@ class RegistrationViewController: BaseViewController {
     
     private func setupButtonHandling() {
         self.registerButtons.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            guard let email = self?.emailTextField.text, let password = self?.passwordTextField.text else {
+            guard let email = self?.emailTextField.text, let password = self?.passwordTextField.text, let name = self?.nameTextField.text, let userName = self?.userNameTextField.text else {
                 return
             }
-            FirebaseUtils.register(email: email, password: password, success: { (user) in
+            FirebaseUtils.register(email: email, password: password, name: name, userName: userName, success: { (user) in
                 NavigationUtils.goToHome()
             }, failure: { (error) in
                 //FIXME: - Change to Custom Alert Controller method
