@@ -87,13 +87,14 @@ class FirebaseUtils {
         }
     }
     
-    static func getUser(success: @escaping (String, String) -> ()) {
+    static func getUser(success: @escaping (UserBlackBird) -> ()) {
         if let user = Auth.auth().currentUser {
             Firestore.firestore().collection(FirebaseKnots.Users.Root).document(user.uid).getDocument(completion: { (snapshot, error) in
                 guard let snap = snapshot, let data = snap.data(), let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
                     return
                 }
-                success(name, userName)
+                let user = UserBlackBird(name, userName)
+                success(user)
             })
         }
     }

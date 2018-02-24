@@ -13,6 +13,7 @@ class BlackBird {
     var time: Date
     var likes : Int
     var userId : String?
+    var user : UserBlackBird?
     
     init(text: String, time: Date, likes: Int) {
         self.text = text

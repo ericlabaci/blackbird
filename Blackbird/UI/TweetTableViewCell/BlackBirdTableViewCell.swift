@@ -28,12 +28,19 @@ class BlackBirdTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configureCellWith(blackBird: BlackBird) {
-        FirebaseUtils.getUser { (name, userName) in
-            self.nameLabel.text = name
+        if let user = blackBird.user {
+            self.nameLabel.text = user.name
             self.blackBirdLabel.text = blackBird.text
-            self.userLabel.text = userName
+            self.userLabel.text = user.userName
+        } else {
+            FirebaseUtils.getUser { (user) in
+                self.nameLabel.text = user.name
+                self.blackBirdLabel.text = blackBird.text
+                self.userLabel.text = user.userName
+                blackBird.user = user
+            }
         }
     }
     
