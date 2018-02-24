@@ -68,21 +68,24 @@ class FirebaseUtils {
                 guard let snap = snapshot, let data = snap.data() else{
                     return
                 }
-                var blackBirdsArray : [BlackBird] = []
-                for value in data.values {
-                    if let valueDict = value as? [String: Any] {
-                        let blackBird = BlackBird(data: valueDict, userId: user.uid)
-                        blackBirdsArray.append(blackBird)
+                FirebaseUtils.getUser(success: { (userBB) in
+                    var blackBirdsArray : [BlackBird] = []
+                    for value in data.values {
+                        if let valueDict = value as? [String: Any] {
+                            let blackBird = BlackBird(data: valueDict, userId: user.uid)
+                            blackBird.user = userBB
+                            blackBirdsArray.append(blackBird)
+                        }
                     }
-                }
-                blackBirdsArray = blackBirdsArray.sorted(by: { (blackBird1, blackBird2) -> Bool in
-                    if blackBird1.time.compare(blackBird2.time) == ComparisonResult.orderedDescending {
-                        return true
-                    } else {
-                        return false
-                    }
+                    blackBirdsArray = blackBirdsArray.sorted(by: { (blackBird1, blackBird2) -> Bool in
+                        if blackBird1.time.compare(blackBird2.time) == ComparisonResult.orderedDescending {
+                            return true
+                        } else {
+                            return false
+                        }
+                    })
+                    success(blackBirdsArray)
                 })
-                success(blackBirdsArray)
             }
         }
     }
@@ -93,7 +96,7 @@ class FirebaseUtils {
                 guard let snap = snapshot, let data = snap.data(), let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
                     return
                 }
-                let user = UserBlackBird(name, userName)
+                let user = UserBlackBird(name: name, userName: userName)
                 success(user)
             })
         }

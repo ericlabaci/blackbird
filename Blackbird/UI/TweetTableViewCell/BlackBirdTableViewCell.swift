@@ -34,13 +34,6 @@ class BlackBirdTableViewCell: UITableViewCell {
             self.nameLabel.text = user.name
             self.blackBirdLabel.text = blackBird.text
             self.userLabel.text = user.userName
-        } else {
-            FirebaseUtils.getUser { (user) in
-                self.nameLabel.text = user.name
-                self.blackBirdLabel.text = blackBird.text
-                self.userLabel.text = user.userName
-                blackBird.user = user
-            }
         }
     }
     
