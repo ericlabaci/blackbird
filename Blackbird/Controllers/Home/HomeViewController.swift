@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import FirebaseFirestore
 import FirebaseCore
 
 class HomeViewController: BaseViewController {

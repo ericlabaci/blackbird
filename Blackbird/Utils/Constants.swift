@@ -54,6 +54,10 @@ struct FirebaseKnots {
             static let UserNames = "userNames"
         }
     }
+    
+    struct FollowingBlackbirds {
+        static let Root = "followingBlackbirds"
+    }
 }
 
 //MARK: - Images

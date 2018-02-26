@@ -9,7 +9,6 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
-import FirebaseFirestore
 
 class FirebaseUtils {
     //MARK: - Authentication
@@ -50,62 +49,100 @@ class FirebaseUtils {
         if let user = Auth.auth().currentUser {
             let uidVar = UUIDUtils.uuidBasedOnTime()
             ConsoleLogger.log("Started to send a blackbird to firestore")
-            Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root).document(user.uid).setData([uidVar : data], options: SetOptions.merge(), completion: { (error) in
+            Database.database().reference().child(FirebaseKnots.Blackbirds.Root).child(user.uid).setValue(data, withCompletionBlock: { (error, dbreference) in
                 if let error = error {
-                    ConsoleLogger.log("Started to send a blackbird to firestore with error: \(error.localizedDescription)")
                     failure?(error)
                 } else {
-                    ConsoleLogger.log("Ended to send a blackbird to firestore without error")
+                    addBlackBirdToFollowing(uuid: uidVar, success: success)
+                }
+            })
+        }
+    }
+    
+    static private func addBlackBirdToFollowing(uuid: String, success: (() -> ())?) {
+        if let user = Auth.auth().currentUser {
+            Database.database().reference().child(FirebaseKnots.FollowingBlackbirds.Root).child(user.uid).setValue([uuid: user.uid], withCompletionBlock: { (error, dbref) in
+                //FIXME: - Adjust how to handle error
+                if error != nil {
+                    ConsoleLogger.log("Error adding to following")
+                } else {
                     success?()
                 }
             })
         }
+        
     }
     
-    static func getAllBlackBirds(success: @escaping ([BlackBird]) -> ()) -> ListenerRegistration? {
-        if let user = Auth.auth().currentUser {
-            return Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root).document(user.uid).addSnapshotListener { (snapshot, error) in
-                guard let snap = snapshot, let data = snap.data() else{
-                    return
-                }
-                FirebaseUtils.getUser(success: { (userBB) in
-                    var blackBirdsArray : [BlackBird] = []
-                    for value in data.values {
-                        if let valueDict = value as? [String: Any] {
-                            let blackBird = BlackBird(data: valueDict, userId: user.uid)
-                            blackBird.user = userBB
-                            blackBirdsArray.append(blackBird)
-                        }
-                    }
-                    blackBirdsArray = blackBirdsArray.sorted(by: { (blackBird1, blackBird2) -> Bool in
-                        if blackBird1.time.compare(blackBird2.time) == ComparisonResult.orderedDescending {
-                            return true
-                        } else {
-                            return false
-                        }
-                    })
-                    success(blackBirdsArray)
-                })
+    static func getAllBlackBirdsFromSinglePerson(userId: String, success: @escaping ([BlackBird]) -> ()) -> UInt? {
+        let listener = Database.database().reference().child(FirebaseKnots.Blackbirds.Root).child(userId).observe(DataEventType.childAdded) { (snapshot) in
+            guard let snap = snapshot else{
+                return
             }
-        }
-        return nil
-    }
-    
-    static func getUser(success: @escaping (UserBlackBird) -> ()) {
-        if let user = Auth.auth().currentUser {
-            Firestore.firestore().collection(FirebaseKnots.Users.Root).document(user.uid).getDocument(completion: { (snapshot, error) in
-                guard let snap = snapshot, let data = snap.data(), let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
-                    return
+            FirebaseUtils.getUser(userId: userId, success: { (userBB) in
+                var blackBirdsArray : [BlackBird] = []
+                for value in snapshot.value {
+                    if let valueDict = value as? [String: Any] {
+                        let blackBird = BlackBird(data: valueDict, userId: userId)
+                        blackBird.user = userBB
+                        blackBirdsArray.append(blackBird)
+                    }
                 }
-                let user = UserBlackBird(name: name, userName: userName)
-                success(user)
+                blackBirdsArray = blackBirdsArray.sorted(by: { (blackBird1, blackBird2) -> Bool in
+                    if blackBird1.time.compare(blackBird2.time) == ComparisonResult.orderedDescending {
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+                success(blackBirdsArray)
             })
         }
+        return listener
     }
     
-    static func filteredFunc() {
-        let user = Auth.auth().currentUser
-        
-        Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root)
+    static func getUser(userId: String,success: @escaping (UserBlackBird) -> ()) {
+        Database.database().reference().child(FirebaseKnots.Users.Root).child(userId).observeSingleEvent(of: .value) { (snapshot) in
+            guard let snap = snapshot, let data = snap.data(), let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
+                return
+            }
+            let user = UserBlackBird(name: name, userName: userName)
+            success(user)
+        }
     }
+    
+//    static func getAllBlackBirdsFollowing(success: @escaping ([BlackBird]) -> ()) -> ListenerRegistration? {
+//        if let user = Auth.auth().currentUser {
+//            let listener =  Firestore.firestore().collection(FirebaseKnots.FollowingBlackbirds.Root).document(user.uid).addSnapshotListener { (snapshot, error) in
+//                guard let snap = snapshot, let data = snap.data() else{
+//                    return
+//                }
+//                for (key, value) in data {
+//                    FirebaseUtils.getBlackBirdWithUUID(uuid: key)
+////                    FirebaseUtils.getUser(userId: value as? String, success: { (userBB) in
+////                        let blackBird = BlackBird(data: valueDict, userId: user.uid)
+////                        blackBird.user = userBB
+////                        //                        blackBirdsArray.append(blackBird)
+////                    })
+//                }
+//            }
+//            return listener
+//        }
+//        return nil
+//    }
+//    
+//    
+//    static func getBlackBirdWithUUID(uuid: String) {
+//        if let user = Auth.auth().currentUser {
+//            Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root).whereField(FieldPath([uuid]) , isEqualTo: uuid).getDocuments(completion: { (snapshot, error) in
+//                guard let snap = snapshot else {
+//                    ConsoleLogger.log("ERROR GETTING SPECIFIC BLACK BIRD")
+//                    return
+//                }
+//                for document in snap.documents {
+//                    print(document)
+//                    
+//                }
+//            })
+//        }
+//    }
 }

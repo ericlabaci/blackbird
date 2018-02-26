@@ -9,7 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
-import FirebaseFirestore
+import FirebaseAuth
 
 class HomeViewModel : BaseViewModel {
     var blackBird : Variable<[BlackBird]> = Variable([])
@@ -21,11 +21,12 @@ class HomeViewModel : BaseViewModel {
     }
     
     private func getAllBlackBirds() {
-        let listener = FirebaseUtils.getAllBlackBirds { (blackBirdArray) in
-            self.blackBird.value = blackBirdArray
-        }
-        if let listener = listener {
-            self.addListener(listener: listener)
-        }
-    }
+//        let listener = FirebaseUtils.getAllBlackBirdsFollowing { (blackBirds) in
+//            self.blackBird.value = blackBirds
+//        }
+//            
+//            if let listener = listener {
+//                self.addListener(listener: listener)
+//            }
+//        }
 }

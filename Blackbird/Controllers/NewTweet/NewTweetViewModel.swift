@@ -12,7 +12,7 @@ class NewTweetViewModel {
     var text: String? {
         didSet {
             if let text = self.text {
-            self.blackBird.text = text
+                self.blackBird.text = text
             }
         }
     }

@@ -81,6 +81,7 @@ class NewTweetViewController : BaseViewController {
         self.viewModel.time = Date()
         self.blackBirdButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: {
             self.viewModel.addTweetToFirebase(success: {
+                self.view.endEditing(true)
                 self.dismiss(animated: true, completion: nil)
             }, failure: { (error) in
                 let alertController = UIAlertController(title: "Error while sending to firebase", message: "", preferredStyle: .alert)
