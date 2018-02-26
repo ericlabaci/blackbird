@@ -213,15 +213,15 @@ Copyright 2018 Google
 
 Copyright 2018 Google
 
+## FirebaseDatabase
+
+Copyright 2018 Google
+
 ## FirebaseFirestore
 
 Copyright 2018 Google
 
 ## FirebaseInstanceID
-
-Copyright 2018 Google
-
-## FirebaseStorage
 
 Copyright 2018 Google
 
