@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import FirebaseFirestore
+import FirebaseCore
 
 class HomeViewController: BaseViewController {
     //MARK: - IBOutlets
@@ -41,6 +43,10 @@ class HomeViewController: BaseViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    deinit {
+        self.homeViewModel.stopAllListeners()
     }
     
     func setupTableViewRX() {

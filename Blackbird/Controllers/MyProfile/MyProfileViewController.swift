@@ -35,6 +35,10 @@ class MyProfileViewController : BaseViewController {
         super.didReceiveMemoryWarning()
     }
     
+    deinit {
+        self.viewModel.stopAllListeners()
+    }
+    
     
     func setUpTableViewRX() {
         self.viewModel.blackBird.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: Identifiers.blackBirdCell, cellType: BlackBirdTableViewCell.self)) {

@@ -11,17 +11,21 @@ import RxCocoa
 import RxSwift
 import FirebaseFirestore
 
-class HomeViewModel {
+class HomeViewModel : BaseViewModel {
     var blackBird : Variable<[BlackBird]> = Variable([])
-    
-    init() {
+
+    override init() {
+        super.init()
+
         self.getAllBlackBirds()
     }
     
-    func getAllBlackBirds() {
-        FirebaseUtils.getAllBlackBirds { (blackBirdArray) in
+    private func getAllBlackBirds() {
+        let listener = FirebaseUtils.getAllBlackBirds { (blackBirdArray) in
             self.blackBird.value = blackBirdArray
         }
+        if let listener = listener {
+            self.addListener(listener: listener)
+        }
     }
-    
 }

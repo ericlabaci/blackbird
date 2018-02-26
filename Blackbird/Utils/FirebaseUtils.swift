@@ -62,9 +62,9 @@ class FirebaseUtils {
         }
     }
     
-    static func getAllBlackBirds(success: @escaping ([BlackBird]) -> ()) {
+    static func getAllBlackBirds(success: @escaping ([BlackBird]) -> ()) -> ListenerRegistration? {
         if let user = Auth.auth().currentUser {
-            Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root).document(user.uid).addSnapshotListener { (snapshot, error) in
+            return Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root).document(user.uid).addSnapshotListener { (snapshot, error) in
                 guard let snap = snapshot, let data = snap.data() else{
                     return
                 }
@@ -88,6 +88,7 @@ class FirebaseUtils {
                 })
             }
         }
+        return nil
     }
     
     static func getUser(success: @escaping (UserBlackBird) -> ()) {

@@ -10,16 +10,22 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class MyProfileViewModel {
+class MyProfileViewModel : BaseViewModel {
     var blackBird : Variable<[BlackBird]> = Variable([])
     
-    init() {
+    override init() {
+        super.init()
+        
         self.getAllBlackBirds()
     }
     
     func getAllBlackBirds() {
-        FirebaseUtils.getAllBlackBirds { (blackBirdArray) in
+        let listener = FirebaseUtils.getAllBlackBirds { (blackBirdArray) in
             self.blackBird.value = blackBirdArray
+        }
+        
+        if let listener = listener {
+            self.addListener(listener: listener)
         }
     }
     
