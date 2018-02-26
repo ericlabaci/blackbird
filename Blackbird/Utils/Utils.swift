@@ -15,3 +15,13 @@ class ConsoleLogger {
         #endif
     }
 }
+
+class UUIDUtils {
+    static func uuidBasedOnTime() -> String {
+        let uuidSize = MemoryLayout<uuid_t>.size
+        let uuidPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: uuidSize)
+        uuid_generate_time(uuidPointer)
+        let uidVar = NSUUID(uuidBytes: uuidPointer).uuidString
+        return uidVar
+    }
+}

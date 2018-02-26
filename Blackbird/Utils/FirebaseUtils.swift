@@ -48,7 +48,7 @@ class FirebaseUtils {
     //MARK: - Home
     static func addBlackBird(data: [String: Any], success: (() -> ())?, failure: ((Error)-> ())?) {
         if let user = Auth.auth().currentUser {
-            let uidVar = NSUUID().uuidString
+            let uidVar = UUIDUtils.uuidBasedOnTime()
             ConsoleLogger.log("Started to send a blackbird to firestore")
             Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root).document(user.uid).setData([uidVar : data], options: SetOptions.merge(), completion: { (error) in
                 if let error = error {
@@ -100,5 +100,11 @@ class FirebaseUtils {
                 success(user)
             })
         }
+    }
+    
+    static func filteredFunc() {
+        let user = Auth.auth().currentUser
+        
+        Firestore.firestore().collection(FirebaseKnots.Blackbirds.Root)
     }
 }
