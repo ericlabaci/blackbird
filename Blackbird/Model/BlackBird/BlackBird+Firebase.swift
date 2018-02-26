@@ -10,7 +10,7 @@ import Foundation
 
 extension BlackBird {
     func addBlackBirdOnFB(success: (() -> ())?, failure: ((Error)-> ())?){
-        let data = [FirebaseKnots.Blackbirds.Text: self.text, FirebaseKnots.Blackbirds.Timestamp: self.time, FirebaseKnots.Blackbirds.Likes: self.likes] as [String: Any]
+        let data = [FirebaseKnots.Blackbirds.Text: self.text, FirebaseKnots.Blackbirds.Timestamp: (self.time.timeIntervalSince1970 * 1000.0).rounded(), FirebaseKnots.Blackbirds.Likes: self.likes] as [String: Any]
         FirebaseUtils.addBlackBird(data: data, success: success, failure: failure)
     }
     

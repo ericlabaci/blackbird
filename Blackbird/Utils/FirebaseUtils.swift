@@ -23,7 +23,7 @@ class FirebaseUtils {
     }
     
     static func register(email: String, password: String, name: String, userName: String, success: ((User) -> ())?, failure: ((Error)-> ())?) {
-        Firestore.firestore().collection(FirebaseKnots.UserNames.Root).document(FirebaseKnots.UserNames.UserNames.Root).setData([FirebaseKnots.UserNames.UserNames.UserNames : [userName : true]], options: SetOptions.merge()) { (error) in
+        Database.database().reference().child("\(FirebaseKnots.UserNames.Root)/\(userName)").setValue("") { (error, databaseReference) in
             if let error = error {
                 failure?(error)
             } else {
@@ -31,13 +31,14 @@ class FirebaseUtils {
                     if let error = error {
                         failure?(error)
                     } else if let user = user {
-                        Firestore.firestore().collection(FirebaseKnots.Users.Root).document(user.uid).setData([FirebaseKnots.Users.Name : name, FirebaseKnots.Users.UserName : userName, FirebaseKnots.Users.Followers : [], FirebaseKnots.Users.Following : []]) { error in
+                        Database.database().reference().child("\(FirebaseKnots.UserNames.Root)/\(userName)").setValue(user.uid)
+                        Database.database().reference().child("\(FirebaseKnots.Users.Root)/\(user.uid)").setValue([FirebaseKnots.Users.Name : name, FirebaseKnots.Users.UserName : userName, FirebaseKnots.Users.Followers : [], FirebaseKnots.Users.Following : []], withCompletionBlock: { (error, databaseReference) in
                             if let error = error {
                                 failure?(error)
                             } else {
                                 success?(user)
                             }
-                        }
+                        })
                     }
                 }
             }
@@ -47,13 +48,13 @@ class FirebaseUtils {
     //MARK: - Home
     static func addBlackBird(data: [String: Any], success: (() -> ())?, failure: ((Error)-> ())?) {
         if let user = Auth.auth().currentUser {
-            let uidVar = UUIDUtils.uuidBasedOnTime()
             ConsoleLogger.log("Started to send a blackbird to firestore")
-            Database.database().reference().child(FirebaseKnots.Blackbirds.Root).child(user.uid).setValue(data, withCompletionBlock: { (error, dbreference) in
+            let reference = Database.database().reference().child(FirebaseKnots.Blackbirds.Root).child(user.uid).childByAutoId()
+            reference.setValue(data, withCompletionBlock: { (error, dbreference) in
                 if let error = error {
                     failure?(error)
                 } else {
-                    addBlackBirdToFollowing(uuid: uidVar, success: success)
+                    addBlackBirdToFollowing(uuid: reference.key, success: success)
                 }
             })
         }
@@ -70,22 +71,16 @@ class FirebaseUtils {
                 }
             })
         }
-        
     }
     
-    static func getAllBlackBirdsFromSinglePerson(userId: String, success: @escaping ([BlackBird]) -> ()) -> UInt? {
-        let listener = Database.database().reference().child(FirebaseKnots.Blackbirds.Root).child(userId).observe(DataEventType.childAdded) { (snapshot) in
-            guard let snap = snapshot else{
-                return
-            }
+    static func getAllBlackBirdsFromSinglePerson(userId: String, success: @escaping ([BlackBird]) -> ()) -> UInt {
+        let listener = Database.database().reference().child(FirebaseKnots.Blackbirds.Root).child(userId).observe(.childAdded) { (snapshot) in
             FirebaseUtils.getUser(userId: userId, success: { (userBB) in
                 var blackBirdsArray : [BlackBird] = []
-                for value in snapshot.value {
-                    if let valueDict = value as? [String: Any] {
-                        let blackBird = BlackBird(data: valueDict, userId: userId)
-                        blackBird.user = userBB
-                        blackBirdsArray.append(blackBird)
-                    }
+                if let dict = snapshot.value as? [String : Any] {
+                    let blackBird = BlackBird(data: dict, userId: userId)
+                    blackBird.user = userBB
+                    blackBirdsArray.append(blackBird)
                 }
                 blackBirdsArray = blackBirdsArray.sorted(by: { (blackBird1, blackBird2) -> Bool in
                     if blackBird1.time.compare(blackBird2.time) == ComparisonResult.orderedDescending {
@@ -99,10 +94,10 @@ class FirebaseUtils {
         }
         return listener
     }
-    
+
     static func getUser(userId: String,success: @escaping (UserBlackBird) -> ()) {
         Database.database().reference().child(FirebaseKnots.Users.Root).child(userId).observeSingleEvent(of: .value) { (snapshot) in
-            guard let snap = snapshot, let data = snap.data(), let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
+            guard let data = snapshot.value as? NSDictionary, let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
                 return
             }
             let user = UserBlackBird(name: name, userName: userName)

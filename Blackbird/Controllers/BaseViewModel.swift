@@ -9,19 +9,11 @@
 import UIKit
 
 class BaseViewModel {
-    private var listeners: [ListenerRegistration] = []
-    
     deinit {
         ConsoleLogger.log("Deinit model: \(self)")
     }
     
-    func addListener(listener: ListenerRegistration) {
-        self.listeners.append(listener)
-    }
-    
     func stopAllListeners() {
-        for listener in self.listeners {
-            listener.remove()
-        }
+        
     }
 }

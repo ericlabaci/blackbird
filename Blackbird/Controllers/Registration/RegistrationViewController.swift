@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-//import FirebaseFirestore
+import FirebaseDatabase
 
 class RegistrationViewController: BaseViewController {
     //MARK: - IBOutlets

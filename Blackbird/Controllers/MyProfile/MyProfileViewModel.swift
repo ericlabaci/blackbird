@@ -14,6 +14,8 @@ import FirebaseAuth
 class MyProfileViewModel : BaseViewModel {
     var blackBird : Variable<[BlackBird]> = Variable([])
     
+    private var getAllBlackBirdsListener: UInt = 0
+    
     override init() {
         super.init()
         
@@ -22,13 +24,9 @@ class MyProfileViewModel : BaseViewModel {
     
     func getAllBlackBirds() {
         if let user = Auth.auth().currentUser {
-            let listener = FirebaseUtils.getAllBlackBirdsFromSinglePerson(userId: user.uid, success: { (blackBirdArray) in
+            self.getAllBlackBirdsListener = FirebaseUtils.getAllBlackBirdsFromSinglePerson(userId: user.uid, success: { (blackBirdArray) in
                 self.blackBird.value = blackBirdArray
             })
-            
-            if let listener = listener {
-                self.addListener(listener: listener)
-            }
         }
     }
     
