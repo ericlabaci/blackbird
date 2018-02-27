@@ -6,14 +6,16 @@
 //  Copyright © 2018 Blackbird. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class UserBlackBird {
     var userName : String
     var name : String
+    var profileImage: UIImage?
     
-    init(name: String, userName: String) {
+    init(name: String, userName: String, profileImage: UIImage? = nil) {
         self.name = name
         self.userName = userName
+        self.profileImage = profileImage
     }
 }

@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import AVKit
 import RxSwift
 import RxCocoa
 import FirebaseDatabase
+import FirebaseStorage
 
 class RegistrationViewController: BaseViewController {
     //MARK: - IBOutlets
-    @IBOutlet weak var profileImageView: UIImageView!{
+    @IBOutlet weak var profileImageButton: UIButton!{
         didSet {
-            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
-            self.profileImageView.clipsToBounds = true
-            self.profileImageView.image = UIImage(named: Images.ProfileDefault)
+            self.profileImageButton.layer.cornerRadius = self.profileImageButton.frame.width / 2
+            self.profileImageButton.clipsToBounds = true
+            self.profileImageButton.setTitle(nil, for: .normal)
+            self.profileImageButton.imageView?.contentMode = .scaleAspectFill
+            self.profileImageButton.setImage(UIImage(named: Images.ProfileDefault), for: .normal)
         }
     }
     @IBOutlet weak var nameTextField: UITextField! {
@@ -56,11 +60,14 @@ class RegistrationViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var registerButtons: UIButton! {
+    @IBOutlet weak var registerButton: UIButton! {
         didSet {
-            self.registerButtons.isEnabled = false
+            self.registerButton.isEnabled = false
         }
     }
+    
+    //MARK: - Variables
+    let registrationViewModel = RegistrationViewModel()
     
     //MARK: - VC Methods
     override func viewDidLoad() {
@@ -89,6 +96,10 @@ class RegistrationViewController: BaseViewController {
             return name?.isValidName
         }
         
+        self.nameTextField.rx.text.subscribe(onNext: { [weak self] name in
+            self?.registrationViewModel.name = name ?? ""
+        }).disposed(by: self.disposeBag)
+        
         self.nameTextField.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe(onNext: { [weak self] in
             self?.userNameTextField.becomeFirstResponder()
         }).disposed(by: self.disposeBag)
@@ -98,6 +109,10 @@ class RegistrationViewController: BaseViewController {
             return userName?.isValidUserName
         }
         
+        self.userNameTextField.rx.text.subscribe(onNext: { [weak self] userName in
+            self?.registrationViewModel.userName = userName ?? ""
+        }).disposed(by: self.disposeBag)
+        
         self.userNameTextField.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe(onNext: { [weak self] in
             self?.emailTextField.becomeFirstResponder()
         }).disposed(by: self.disposeBag)
@@ -106,6 +121,10 @@ class RegistrationViewController: BaseViewController {
         let isEmailValid = self.emailTextField.rx.text.map { name in
             return name?.isValidEmail
         }
+        
+        self.emailTextField.rx.text.subscribe(onNext: { [weak self] email in
+            self?.registrationViewModel.email = email ?? ""
+        }).disposed(by: self.disposeBag)
         
         self.emailTextField.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe(onNext: { [weak self] in
             self?.repeatEmailTextField.becomeFirstResponder()
@@ -124,6 +143,10 @@ class RegistrationViewController: BaseViewController {
         let isPasswordValid = self.passwordTextField.rx.text.map { password in
             return password?.isValidPassword
         }
+        
+        self.passwordTextField.rx.text.subscribe(onNext: { [weak self] password in
+            self?.registrationViewModel.password = password ?? ""
+        }).disposed(by: self.disposeBag)
         
         self.passwordTextField.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe(onNext: { [weak self] in
             self?.repeatPasswordTextField.becomeFirstResponder()
@@ -145,20 +168,59 @@ class RegistrationViewController: BaseViewController {
         }
         
         shouldEnableButton.subscribe(onNext: { [weak self] (enabled) in
-            self?.registerButtons.isEnabled = enabled
+            self?.registerButton.isEnabled = enabled
         }).disposed(by: self.disposeBag)
     }
     
     private func setupButtonHandling() {
-        self.registerButtons.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            guard let email = self?.emailTextField.text, let password = self?.passwordTextField.text, let name = self?.nameTextField.text, let userName = self?.userNameTextField.text else {
-                return
-            }
-            FirebaseUtils.register(email: email, password: password, name: name, userName: userName, success: { (user) in
+        //MARK: Profile Image
+        self.profileImageButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+                self?.openCamera(completion: {
+                    let imagePickerController = UIImagePickerController()
+                    imagePickerController.sourceType = .camera
+                    imagePickerController.delegate = self
+                    
+                    self?.present(imagePickerController, animated: true, completion: nil)
+                })
+            })
+            let libraryAction = UIAlertAction(title: "Library", style: .default, handler: { (action) in
+                self?.openGallery(completion: {
+                    let imagePickerController = UIImagePickerController()
+                    imagePickerController.sourceType = .photoLibrary
+                    imagePickerController.delegate = self
+                    
+                    self?.present(imagePickerController, animated: true, completion: nil)
+                })
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            actionSheetController.addAction(cameraAction)
+            actionSheetController.addAction(libraryAction)
+            actionSheetController.addAction(cancelAction)
+            
+            self?.present(actionSheetController, animated: true, completion: nil)
+        }).disposed(by: self.disposeBag)
+        
+        //MARK: Register
+        self.registerButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.registrationViewModel.register(success: {
                 NavigationUtils.goToHome()
             }, failure: { (error) in
                 self?.present(AlertControllerUtils.getOKAlertController(code: .RegisterFailed, okCompletion: nil), animated: true, completion: nil)
             })
         }).disposed(by: self.disposeBag)
+    }
+}
+
+extension RegistrationViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.profileImageButton.setImage(image, for: .normal)
+            self.registrationViewModel.profileImage = image
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
     }
 }

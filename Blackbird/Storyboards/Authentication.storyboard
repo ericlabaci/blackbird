@@ -88,13 +88,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTZ-Do-JJS">
-                                <rect key="frame" x="156" y="96" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gTZ-Do-JJS" secondAttribute="height" multiplier="1:1" id="Y0x-oB-A2s"/>
-                                    <constraint firstAttribute="width" constant="64" id="s1K-fB-QJJ"/>
-                                </constraints>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3NO-Gb-1Fa">
                                 <rect key="frame" x="32" y="184" width="311" height="260"/>
                                 <subviews>
@@ -140,16 +133,24 @@
                                 <rect key="frame" x="159.5" y="605" width="57" height="30"/>
                                 <state key="normal" title="Register"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cv-DA-gmR">
+                                <rect key="frame" x="155.5" y="96" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="bU3-fC-Hfh"/>
+                                    <constraint firstAttribute="width" secondItem="1cv-DA-gmR" secondAttribute="height" multiplier="1:1" id="n7H-SC-D8X"/>
+                                </constraints>
+                                <state key="normal" image="default_profile_bird"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gTZ-Do-JJS" firstAttribute="top" secondItem="LCg-Kd-4SD" secondAttribute="top" constant="32" id="AhK-hd-YRx"/>
+                            <constraint firstItem="3NO-Gb-1Fa" firstAttribute="top" secondItem="1cv-DA-gmR" secondAttribute="bottom" constant="24" id="AOE-4k-w1r"/>
+                            <constraint firstItem="1cv-DA-gmR" firstAttribute="top" secondItem="LCg-Kd-4SD" secondAttribute="top" constant="32" id="PoE-oo-LkT"/>
                             <constraint firstItem="LCg-Kd-4SD" firstAttribute="trailing" secondItem="3NO-Gb-1Fa" secondAttribute="trailing" constant="32" id="U5M-FI-vum"/>
                             <constraint firstItem="x0k-Aa-yj4" firstAttribute="centerX" secondItem="LCg-Kd-4SD" secondAttribute="centerX" id="UeE-55-Z0H"/>
                             <constraint firstItem="3NO-Gb-1Fa" firstAttribute="leading" secondItem="LCg-Kd-4SD" secondAttribute="leading" constant="32" id="VXP-r2-QvA"/>
                             <constraint firstItem="LCg-Kd-4SD" firstAttribute="bottom" secondItem="x0k-Aa-yj4" secondAttribute="bottom" constant="32" id="bMm-RH-GXu"/>
-                            <constraint firstItem="3NO-Gb-1Fa" firstAttribute="top" secondItem="gTZ-Do-JJS" secondAttribute="bottom" constant="24" id="cAR-qE-3DS"/>
-                            <constraint firstItem="gTZ-Do-JJS" firstAttribute="centerX" secondItem="9Ji-cw-vTg" secondAttribute="centerX" id="i67-ra-QoD"/>
+                            <constraint firstItem="1cv-DA-gmR" firstAttribute="centerX" secondItem="LCg-Kd-4SD" secondAttribute="centerX" id="iEX-yo-bqj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LCg-Kd-4SD"/>
                     </view>
@@ -157,8 +158,8 @@
                         <outlet property="emailTextField" destination="0Pk-Kc-aMn" id="F8I-DR-kp2"/>
                         <outlet property="nameTextField" destination="4a9-zr-rOp" id="SsR-5A-SXJ"/>
                         <outlet property="passwordTextField" destination="Je6-fB-Khq" id="BPT-dF-ab7"/>
-                        <outlet property="profileImageView" destination="gTZ-Do-JJS" id="viP-Ls-DYR"/>
-                        <outlet property="registerButtons" destination="x0k-Aa-yj4" id="1h8-wF-Aat"/>
+                        <outlet property="profileImageButton" destination="1cv-DA-gmR" id="Y0T-cI-3QO"/>
+                        <outlet property="registerButton" destination="x0k-Aa-yj4" id="gyI-AO-Gqq"/>
                         <outlet property="repeatEmailTextField" destination="kxw-dA-mYx" id="V5r-Vz-erT"/>
                         <outlet property="repeatPasswordTextField" destination="60K-Rr-oaR" id="PuO-t0-dFx"/>
                         <outlet property="userNameTextField" destination="2sY-o8-Di6" id="CRr-Wz-OaW"/>
@@ -187,4 +188,7 @@
             <point key="canvasLocation" x="-238" y="248"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="default_profile_bird" width="700" height="700"/>
+    </resources>
 </document>

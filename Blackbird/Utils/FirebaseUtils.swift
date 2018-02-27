@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class FirebaseUtils {
     //MARK: - Authentication
@@ -22,7 +23,8 @@ class FirebaseUtils {
         }
     }
     
-    static func register(email: String, password: String, name: String, userName: String, success: ((User) -> ())?, failure: ((Error)-> ())?) {
+    
+    static func register(email: String, password: String, name: String, userName: String, profileImage: UIImage?, success: ((User) -> ())?, failure: ((Error)-> ())?) {
         Database.database().reference().child("\(FirebaseKnots.UserNames.Root)/\(userName)").setValue("") { (error, databaseReference) in
             if let error = error {
                 failure?(error)
@@ -35,6 +37,18 @@ class FirebaseUtils {
                         Database.database().reference().child("\(FirebaseKnots.Users.Root)/\(user.uid)").setValue([FirebaseKnots.Users.Name : name, FirebaseKnots.Users.UserName : userName, FirebaseKnots.Users.Followers : [], FirebaseKnots.Users.Following : []], withCompletionBlock: { (error, databaseReference) in
                             if let error = error {
                                 failure?(error)
+                            } else if let profileImage = profileImage {
+                                if let resizedImage = self.resize(image: profileImage, toWidth: 128), let imageData = UIImagePNGRepresentation(resizedImage) {
+                                    Storage.storage().reference().child("profileImages/\(user.uid)").putData(imageData, metadata: nil, completion: { (storageMetadata, error) in
+                                        if let error = error {
+                                            failure?(error)
+                                        } else {
+                                            success?(user)
+                                        }
+                                    })
+                                } else {
+                                    success?(user)
+                                }
                             } else {
                                 success?(user)
                             }
@@ -43,6 +57,17 @@ class FirebaseUtils {
                 }
             }
         }
+    }
+    
+    static func resize(image: UIImage?, toWidth width: CGFloat) -> UIImage? {
+        guard let image = image else {
+            return nil
+        }
+        let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/image.size.width * image.size.height)))
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, image.scale)
+        defer { UIGraphicsEndImageContext() }
+        image.draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
     
     //MARK: - Home
@@ -62,7 +87,7 @@ class FirebaseUtils {
     
     static private func addBlackBirdToFollowing(uuid: String, success: (() -> ())?) {
         if let user = Auth.auth().currentUser {
-            Database.database().reference().child(FirebaseKnots.FollowingBlackbirds.Root).child(user.uid).setValue([uuid: user.uid], withCompletionBlock: { (error, dbref) in
+            Database.database().reference().child(FirebaseKnots.FollowingBlackbirds.Root).child(user.uid).child(uuid).setValue(user.uid, withCompletionBlock: { (error, dbref) in
                 //FIXME: - Adjust how to handle error
                 if error != nil {
                     ConsoleLogger.log("Error adding to following")
@@ -97,11 +122,18 @@ class FirebaseUtils {
 
     static func getUser(userId: String,success: @escaping (UserBlackBird) -> ()) {
         Database.database().reference().child(FirebaseKnots.Users.Root).child(userId).observeSingleEvent(of: .value) { (snapshot) in
-            guard let data = snapshot.value as? NSDictionary, let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
+            guard let user = Auth.auth().currentUser, let data = snapshot.value as? NSDictionary, let name = data[FirebaseKnots.Users.Name] as? String, let userName = data[FirebaseKnots.Users.UserName] as? String else {
                 return
             }
-            let user = UserBlackBird(name: name, userName: userName)
-            success(user)
+            Storage.storage().reference().child("profileImages/\(user.uid)").getData(maxSize: INT64_MAX, completion: { (data, error) in
+                if let data = data {
+                    let user = UserBlackBird(name: name, userName: userName, profileImage: UIImage(data: data))
+                    success(user)
+                } else {
+                    let user = UserBlackBird(name: name, userName: userName)
+                    success(user)
+                }
+            })
         }
     }
     

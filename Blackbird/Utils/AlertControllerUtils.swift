@@ -34,6 +34,21 @@ class AlertControllerUtils {
         return alertController
     }
     
+    class func getSettingsAlertController(code: AlertControllerCode) -> UIAlertController {
+        let alertController = self.getBaseAlertController(code: code)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { (action) in
+            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        })
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        
+        alertController.addAction(settingsAction)
+        alertController.addAction(noAction)
+        
+        return alertController
+    }
+    
     private class func getBaseAlertController(code: AlertControllerCode) -> UIAlertController {
         if let path = Bundle.main.path(forResource: "AlertMessages", ofType: "plist"), let dict = NSDictionary(contentsOfFile: path), let alertDict = dict["\(code.rawValue)"] as? NSDictionary {
             let title = alertDict["title"] as? String

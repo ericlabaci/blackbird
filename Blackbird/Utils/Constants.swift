@@ -81,4 +81,8 @@ enum AlertControllerCode : UInt {
     case SomethingWentWrong = 0
     case RegisterFailed = 1
     case LoginFailed = 2
+    case NoCameraAccessPermission = 3
+    case CameraAccessRestricted = 4
+    case NoGalleryAccessPermission = 5
+    case GalleryAccessRestricted = 6
 }

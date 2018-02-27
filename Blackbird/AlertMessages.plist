@@ -2,6 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>6</key>
+	<dict>
+		<key>message</key>
+		<string>Gallery access is restricted. Please turn off the restriction.</string>
+	</dict>
+	<key>5</key>
+	<dict>
+		<key>message</key>
+		<string>Gallery access was not granted. Please redirect to your device settings.</string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>message</key>
+		<string>Camera access is restricted. Please turn off the restriction.</string>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>message</key>
+		<string>Camera access was not granted. Please redirect to your device settings.</string>
+	</dict>
 	<key>2</key>
 	<dict>
 		<key>message</key>

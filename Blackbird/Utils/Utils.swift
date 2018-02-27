@@ -6,7 +6,8 @@
 //  Copyright © 2018 Blackbird. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import AVKit
 
 class ConsoleLogger {
     static func log(_ string: String?) {
